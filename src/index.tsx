@@ -1,9 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './css/index.css';
-import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
+
+// Bootstrap Imports //
+import 'bootstrap/dist/css/bootstrap.css';
+import $ from 'jquery';
+import Popper from 'popper.js';
+import 'bootstrap/dist/js/bootstrap.bundle';
+
+
+// Css imports //
+import './css/index.css';
+// ts/js imports // 
 import './ts-plugins/no-right-click';
+import App from './components/App/App';
+
 
 ReactDOM.render(
   <React.StrictMode>
