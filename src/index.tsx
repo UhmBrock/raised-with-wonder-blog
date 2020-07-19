@@ -8,17 +8,19 @@ import $ from 'jquery';
 import Popper from 'popper.js';
 import 'bootstrap/dist/js/bootstrap.bundle';
 
+// Component Imports
+import Navbar from './components/NavBar/Navbar';
 
 // Css imports //
 import './css/index.css';
+
 // ts/js imports // 
 import './ts-plugins/no-right-click';
-import App from './components/App/App';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Navbar />
   </React.StrictMode>,
   document.getElementById('root')
 );

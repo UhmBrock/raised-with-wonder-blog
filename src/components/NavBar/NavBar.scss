@@ -1,4 +1,6 @@
-@use 'css/_base';
+$BG_COLOR: #fffbf6;
+$FONT_COLOR: #efc6b4;
+
 
 #navbar-logo {
     height: 36px;
@@ -20,14 +22,18 @@
 .search {
     input {
         height: 100%;
-        border: none;
+        border: solid $FONT_COLOR 1px;
         background-color: $BG_COLOR;
+        text-align: right;
+        border-radius: 3em;
+        
     }
 }
 
 .fa-search {
     color: $FONT_COLOR;
     font-size: 36px;
+    max-height: 36.8px;
 }
 
 #navbar-section-list .nav-link {

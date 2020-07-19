@@ -49,16 +49,14 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
                 </div> 
  
                 <form className="form-inline">
-                    <div className="btn-group" role="group">
-                        <span className="collapse search">
-                            <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
-                        </span>
-                        <span className="show">
-                            <button className="btn" type="button" data-toggle="collapse" data-target=".search">
-                                <span className="fa fa-search" />
-                            </button>    
-                        </span>
-                    </div>
+                    <span className="collapse search">
+                        <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
+                    </span>
+                    <span className="show">
+                        <button className="btn" type="button" data-toggle="collapse" data-target=".search">
+                            <span className="fa fa-search" />
+                        </button>    
+                    </span>
                 </form>
             </nav>
         )
