@@ -14,38 +14,28 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
 
     render() {
         return (
-            <header className="navbar fixed-top navbar-expand-lg"> 
-                <a className="navbar-brand ml-5 my-2" href="/home">
-                    raised with wonder
-                </a>
-
-                { /** collapse button */}
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                
-                <div className="collapse navbar-collapse">
-                    <ul className="navbar-nav mx-auto" id="navbar-section-list">
-                        <li className="nav-item active">
-                            <a className="nav-link" href="/home">Home</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/about-me">About Me</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/blog">Blog</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/ophiebee">OphieBee</a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="/homeschool">Homeschool</a>
-                        </li>
-                    </ul>
+            <nav className="navbar navbar-light fixed-top navbar-expand-xl"> 
+                <div className="navbar-header ml-5">
+                    <a className="navbar-brand" href="/home">
+                        raised with wonder
+                    </a>
                 </div>
+                
+                { /** collapse button */}
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-section-list" aria-expanded="false" aria-label="Toggle navigation">
+                        <span className="navbar-toggler-icon"></span>
+                </button>
 
                 <div className="collapse navbar-collapse">
-                    <span className="navbar-nav ml-auto mr-5">
+                    <div className="navbar-nav mx-auto" id="navbar-section-list">
+                        <a className="nav-item nav-link active" href="/home">Home</a>
+                        <a className="nav-item nav-link" href="/about-me">About Me</a>
+                        <a className="nav-item nav-link" href="/blog">Blog</a>
+                        <a className="nav-item nav-link" href="/ophiebee">OphieBee</a>
+                        <a className="nav-item nav-link" href="/homeschool">Homeschool</a>
+                    </div>
+            
+                    <div className="navbar-nav mx-auto" id="navbar-social-media-list">
                         <a className="mx-3 social-square" href="https://www.youtube.com/channel/UCHc75m64K2PbIEjgJXZPNEg?view_as=subscriber" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-youtube-play"/>
                         </a>
@@ -55,9 +45,22 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
                         <a className="mx-3 social-square" href="https://www.pinterest.com/raisedwithwonder/" target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-pinterest-p"/>
                         </a>
-                    </span>
-                </div>
-            </header>
+                    </div>
+                </div> 
+ 
+                <form className="form-inline">
+                    <div className="btn-group" role="group">
+                        <span className="collapse search">
+                            <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
+                        </span>
+                        <span className="show">
+                            <button className="btn" type="button" data-toggle="collapse" data-target=".search">
+                                <span className="fa fa-search" />
+                            </button>    
+                        </span>
+                    </div>
+                </form>
+            </nav>
         )
     }
 }

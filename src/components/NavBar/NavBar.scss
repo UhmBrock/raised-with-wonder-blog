@@ -1,10 +1,12 @@
+@use 'css/_base';
+
 #navbar-logo {
     height: 36px;
     width: 310px;   
 }
 
 .navbar {
-    background-color: #fffbf6;
+    background-color: $BG_COLOR;
 
     .navbar-brand {
         text-decoration: none;
@@ -13,6 +15,19 @@
         font-weight: bolder;
         font-family: Georgia, 'Times New Roman', Times, serif;
     }
+}
+
+.search {
+    input {
+        height: 100%;
+        border: none;
+        background-color: $BG_COLOR;
+    }
+}
+
+.fa-search {
+    color: $FONT_COLOR;
+    font-size: 36px;
 }
 
 #navbar-section-list .nav-link {
@@ -25,6 +40,6 @@
     i {
         font-size: 36px;
         width: 36px;
-        color: #efc6b4;
+        color: $FONT_COLOR;
     }
 }
