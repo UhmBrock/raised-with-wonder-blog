@@ -1,0 +1,24 @@
+$BG_COLOR: #fffbf6;
+$FONT_COLOR: #efc6b4;
+
+#carousel-featured {
+    // height: 40vw;
+    // width: 6vw;
+    height: 400px;
+    width: auto;
+    overflow: hidden;
+    border: 5px $FONT_COLOR solid;
+
+    .carousel-inner > .carousel-item  > img, .carousel-inner > .carousel-item > a > img {
+     
+        .portrait {
+            height: 100% !important;
+            width: auto !important;
+        }
+
+        .landscape {
+            width: 100% !important;
+            height: auto !important;
+        }
+    }
+}
