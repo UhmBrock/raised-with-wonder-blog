@@ -1,0 +1,26 @@
+$BG_COLOR: #fffbf6;
+$FONT_COLOR: #efc6b4;
+
+#base-app-container {
+    padding-top: 100px;
+    background-color: $BG_COLOR;
+}
+
+.container-fluid { 
+
+    #blog-column, #archive-column {
+        background-color: $BG_COLOR;
+        border: 5px $FONT_COLOR solid;
+    }
+}
+
+#page-header-image {
+    height: auto;
+    max-height: 30vh;
+    max-width: 100%;
+    display: block;
+}
+
+.blog-featured-image {
+    width: 50px;
+}

@@ -1,44 +1,53 @@
-$BG_COLOR: #fffbf6;
-$FONT_COLOR: #efc6b4;
+$BG_COLOR: #efc6b4;
+$FONT_COLOR: #fffbf6;
 
-
-#navbar-logo {
-    height: 36px;
-    width: 310px;   
+@font-face {
+    font-family: 'Silverberry Script';
+    src: url(../../assets/Silverberry-Regular.ttf);
 }
 
 .navbar {
     background-color: $BG_COLOR;
-
-    .navbar-brand {
+    
+    .navbar-brand, .navbar-brand:hover {
         text-decoration: none;
-        color: black;
-        font-size: 36px;
-        font-weight: bolder;
-        font-family: Georgia, 'Times New Roman', Times, serif;
+        color: $FONT_COLOR;
+        font-size: 67px;
+        font-family: 'Silverberry Script';
+        margin: -20px auto -30px;
     }
-}
 
-.search {
-    input {
-        height: 100%;
-        border: solid $FONT_COLOR 1px;
-        background-color: $BG_COLOR;
-        text-align: right;
-        border-radius: 3em;
-        
-    }
-}
-
-.fa-search {
-    color: $FONT_COLOR;
-    font-size: 36px;
-    max-height: 36.8px;
 }
 
 #navbar-section-list .nav-link {
-    color: black;
-    font-weight: lighter;
+    color: $FONT_COLOR;
+    font-size: 20px;
+}
+
+.search {
+    input.form-control {
+        border: solid $FONT_COLOR 1px;
+        background-color: $FONT_COLOR;
+        text-align: right;
+        border-radius: 3em;
+
+        &:focus {
+            box-shadow: 0 0 0 0.2rem rgba(112, 128, 144, 0.25);
+        }
+    }
+}
+
+#navbar-search-button {
+
+    outline: none;
+    box-shadow: none;
+
+    .fa-search {
+        color: $FONT_COLOR;
+        font-size: 36px;
+        max-height: 36.8px;
+    }
+    
 }
 
 .social-square {
