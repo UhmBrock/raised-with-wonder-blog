@@ -33,8 +33,8 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
                         <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse">
-                    <div className="navbar-nav ml-auto" id="navbar-section-list"> 
+                <div className="collapse navbar-collapse w-100">
+                    <div className="navbar-nav mx-auto" id="navbar-section-list"> 
                         <NavLink exact to="/" activeClassName="active" className="nav-item nav-link">Home</NavLink>
                         <NavLink to="/about-me" activeClassName="active" className="nav-item nav-link">About Me</NavLink>
                         <NavLink to="/blog" activeClassName="active" className="nav-item nav-link">Blog</NavLink>
@@ -42,7 +42,7 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
                         <NavLink to="/homeschool" activeClassName="active" className="nav-item nav-link">Homeschool</NavLink>
                     </div>
             
-                    <div className="navbar-nav ml-auto" id="navbar-social-media-list">
+                    <div className="navbar-nav mx-auto" id="navbar-social-media-list">
                         <a className="mx-3 social-square" href={YOUTUBE_LINK} target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-youtube-play"/>
                         </a>
@@ -56,7 +56,7 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
                 </div> 
  
                 <div className="collapse navbar-collapse">
-                    <form className="form-inline  ml-auto">
+                    <form className="form-inline">
                         <span className="collapse search">
                             <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
                         </span>
