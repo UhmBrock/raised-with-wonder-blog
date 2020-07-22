@@ -24,6 +24,11 @@ $FONT_COLOR: #fffbf6;
     font-size: 20px;
 }
 
+.active {
+    background-color: $FONT_COLOR !important;
+    color: $BG_COLOR !important;
+}
+
 .search {
     input.form-control {
         border: solid $FONT_COLOR 1px;

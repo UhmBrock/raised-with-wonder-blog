@@ -1,5 +1,12 @@
 import React from 'react';
+import {
+    NavLink
+} from 'react-router-dom';
 import './NavBar.scss';
+
+const YOUTUBE_LINK = "https://www.youtube.com/channel/UCHc75m64K2PbIEjgJXZPNEg?view_as=subscriber";
+const INSTAGRAM_LINK = "https://www.instagram.com/raisedwithwonder/";
+const PINTEREST_LINK = "https://www.pinterest.com/raisedwithwonder/";
 
 interface NavbarProps {
 
@@ -14,7 +21,7 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
 
     render() {
         return (
-            <nav className="navbar navbar-light fixed-top navbar-expand-xl"> 
+            <nav className="navbar nav-pills navbar-light fixed-top navbar-expand-xl"> 
                 <div className="navbar-header">
                     <a className="navbar-brand ml-3" href="/home">
                         raised with wonder
@@ -28,21 +35,21 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
 
                 <div className="collapse navbar-collapse">
                     <div className="navbar-nav ml-auto" id="navbar-section-list"> 
-                        <a className="nav-item nav-link active" href="/home">Home</a>
-                        <a className="nav-item nav-link" href="/about-me">About Me</a>
-                        <a className="nav-item nav-link" href="/blog">Blog</a>
-                        <a className="nav-item nav-link" href="/ophiebee">OphieBee</a>
-                        <a className="nav-item nav-link" href="/homeschool">Homeschool</a>
+                        <NavLink exact to="/" activeClassName="active" className="nav-item nav-link">Home</NavLink>
+                        <NavLink to="/about-me" activeClassName="active" className="nav-item nav-link">About Me</NavLink>
+                        <NavLink to="/blog" activeClassName="active" className="nav-item nav-link">Blog</NavLink>
+                        <NavLink to="/ophiebee" activeClassName="active" className="nav-item nav-link">OphieBee</NavLink>
+                        <NavLink to="/homeschool" activeClassName="active" className="nav-item nav-link">Homeschool</NavLink>
                     </div>
             
                     <div className="navbar-nav ml-auto" id="navbar-social-media-list">
-                        <a className="mx-3 social-square" href="https://www.youtube.com/channel/UCHc75m64K2PbIEjgJXZPNEg?view_as=subscriber" target="_blank" rel="noopener noreferrer">
+                        <a className="mx-3 social-square" href={YOUTUBE_LINK} target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-youtube-play"/>
                         </a>
-                        <a className="mx-3 social-square" href="https://www.instagram.com/raisedwithwonder/" target="_blank" rel="noopener noreferrer">
+                        <a className="mx-3 social-square" href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-instagram"/>
                         </a>
-                        <a className="mx-3 social-square" href="https://www.pinterest.com/raisedwithwonder/" target="_blank" rel="noopener noreferrer">
+                        <a className="mx-3 social-square" href={PINTEREST_LINK} target="_blank" rel="noopener noreferrer">
                             <i className="fa fa-pinterest-p"/>
                         </a>
                     </div>
