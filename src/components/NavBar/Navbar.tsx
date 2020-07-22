@@ -33,7 +33,7 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
                         <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse w-100">
+                <div className="collapse navbar-collapse w-75">
                     <div className="navbar-nav mx-auto" id="navbar-section-list"> 
                         <NavLink exact to="/" activeClassName="active" className="nav-item nav-link">Home</NavLink>
                         <NavLink to="/about-me" activeClassName="active" className="nav-item nav-link">About Me</NavLink>
@@ -56,7 +56,7 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
                 </div> 
  
                 <div className="collapse navbar-collapse">
-                    <form className="form-inline">
+                    <form className="form-inline ml-auto">
                         <span className="collapse search">
                             <input className="form-control" type="search" placeholder="Search" aria-label="Search"/>
                         </span>

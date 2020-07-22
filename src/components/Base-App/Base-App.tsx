@@ -30,10 +30,19 @@ export default class BaseApp extends React.Component<BaseAppProps, BaseAppState>
 
                     <Switch>
 
-                        <Route path="/">
+                        <Route exact path="/">
                             <Home />    
                         </Route>
 
+                        <Route path="/about-me">
+
+                        </Route>
+
+                        <Route> {/* 404 Page */ }
+                            <div>
+                                <h1> 404 Error </h1>
+                            </div>
+                        </Route>
                     </Switch>
     
                 </div>
