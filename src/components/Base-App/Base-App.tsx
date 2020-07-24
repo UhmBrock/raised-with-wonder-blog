@@ -8,6 +8,7 @@ import './base-app.scss';
 
 import Navbar from '../NavBar/Navbar';
 import Home from '../Home/Home';
+import BlogCreateForm from '../BlogCreateForm/BlogCreateForm';
 
 interface BaseAppProps {
 
@@ -36,6 +37,10 @@ export default class BaseApp extends React.Component<BaseAppProps, BaseAppState>
 
                         <Route path="/about-me">
 
+                        </Route>
+
+                        <Route path="/blog">
+                            <BlogCreateForm />
                         </Route>
 
                         <Route> {/* 404 Page */ }

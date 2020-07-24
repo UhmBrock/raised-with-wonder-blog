@@ -4,7 +4,6 @@ import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
 import BlogEntry from '../BlogEntry/BlogEntry';
 
 import banner_image from '../../images/rww-banner.png';
-import blog_image from '../../images/color_swatches.jpg';
 
 interface HomeProps {
 
