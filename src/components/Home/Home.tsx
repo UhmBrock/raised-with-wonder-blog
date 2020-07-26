@@ -1,5 +1,5 @@
 import React from 'react';
-
+import axios from 'axios';
 import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
 import BlogEntry from '../BlogEntry/BlogEntry';
 
@@ -27,7 +27,11 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                     </div>
                     <div className="offset-lg-1 col-lg-3" id="archive-column">
                         Archive Column
+                        <p>
+                            { async () => { return await axios.get('localhost:5000/api/getList') }}
+                        </p>
                     </div>
+
                 </div>
             </div>
         )
