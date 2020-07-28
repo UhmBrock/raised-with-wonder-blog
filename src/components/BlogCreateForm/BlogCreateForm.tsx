@@ -1,12 +1,13 @@
 import React from 'react';
-
+import { RouteComponentProps } from 'react-router';
 import './BlogCreateForm.scss';
 
 // Import TinyMCE
-import { Editor, IAllProps } from '@tinymce/tinymce-react';
+import { Editor } from '@tinymce/tinymce-react';
+import dbRequest from '../../externals/dbRequest';
 
-interface BCFProps {
-
+interface BCFProps extends Pick<RouteComponentProps<{title?: string}>, "match">{
+    // Any additional props you need
 }
 
 interface BCFState {
@@ -26,8 +27,21 @@ export default class BlogCreateForm extends React.Component<BCFProps, BCFState> 
         this.setState({content});
     }
     
+    async componentWillMount() {
+        // If passed a title, get the blog post. Otherwise keep form empty.
+        if(this.props.match.params.title !== undefined) { 
+            const newContent = await dbRequest.getBlog(this.props.match.params.title);
+            this.setState({
+                content: newContent
+            });
+        }
+    }
 
     render() {
+
+        
+        console.log(this.props.match.params.title);
+
         return (
             <div>
                 <Editor
