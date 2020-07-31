@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import './base-app.scss';
 
-import Navbar from '../NavBar/Navbar';
+import Navbar from './NavBar/Navbar';
 import Home from '../Home/Home';
 import BlogCreateForm from '../BlogCreateForm/BlogCreateForm';
 
@@ -39,9 +39,7 @@ export default class BaseApp extends React.Component<BaseAppProps, BaseAppState>
 
                         </Route>
 
-                        <Route path="/blog">
-                            <BlogCreateForm />
-                        </Route>
+                        <Route path="/blog" component={BlogCreateForm} />
 
                         <Route> {/* 404 Page */ }
                             <div>
