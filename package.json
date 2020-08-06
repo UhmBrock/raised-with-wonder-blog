@@ -7,7 +7,7 @@
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
     "@tinymce/tinymce-react": "^3.6.0",
-    "@types/express": "^4.17.7",
+    "@types/express": "github:types/express",
     "@types/jest": "^24.9.1",
     "@types/node": "^12.12.50",
     "@types/pg": "^7.14.4",
@@ -21,6 +21,10 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "jquery": "^3.5.1",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "passport-google-oauth20": "^2.0.0",
+    "passport-instagram": "^1.0.0",
     "pg": "^8.3.0",
     "popper.js": "^1.16.1",
     "react": "^16.13.1",
@@ -53,6 +57,10 @@
   "devDependencies": {
     "@types/cors": "^2.8.6",
     "@types/jquery": "^3.5.0",
+    "@types/passport": "^1.0.4",
+    "@types/passport-facebook": "^2.1.10",
+    "@types/passport-google-oauth20": "^2.0.3",
+    "@types/passport-instagram": "^1.0.1",
     "node-sass": "^4.14.1",
     "typescript": "^3.9.7"
   }

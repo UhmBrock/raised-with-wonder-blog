@@ -36,21 +36,20 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
                 <div className="collapse navbar-collapse w-75">
                     <div className="navbar-nav mx-auto" id="navbar-section-list"> 
                         <NavLink exact to="/" activeClassName="active" className="nav-item nav-link">Home</NavLink>
-                        <NavLink to="/about-me" activeClassName="active" className="nav-item nav-link">About Me</NavLink>
                         <NavLink to="/blog" activeClassName="active" className="nav-item nav-link">Blog</NavLink>
                         <NavLink to="/ophiebee" activeClassName="active" className="nav-item nav-link">OphieBee</NavLink>
                         <NavLink to="/homeschool" activeClassName="active" className="nav-item nav-link">Homeschool</NavLink>
                     </div>
             
                     <div className="navbar-nav mx-auto" id="navbar-social-media-list">
-                        <a className="mx-3 social-square" href={YOUTUBE_LINK} target="_blank" rel="noopener noreferrer">
-                            <i className="fa fa-youtube-play"/>
+                        <a className="mr-3 social-square" href={YOUTUBE_LINK} target="_blank" rel="noopener noreferrer">
+                            <i className="fab fa-youtube"/>
                         </a>
-                        <a className="mx-3 social-square" href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer">
-                            <i className="fa fa-instagram"/>
+                        <a className="ml-1 mr-2 social-square" href={INSTAGRAM_LINK} target="_blank" rel="noopener noreferrer">
+                            <i className="fab fa-instagram"/>
                         </a>
-                        <a className="mx-3 social-square" href={PINTEREST_LINK} target="_blank" rel="noopener noreferrer">
-                            <i className="fa fa-pinterest-p"/>
+                        <a className="ml-1 social-square" href={PINTEREST_LINK} target="_blank" rel="noopener noreferrer">
+                            <i className="fab fa-pinterest"/>
                         </a>
                     </div>
                 </div> 
@@ -62,7 +61,7 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
                         </span>
                         <span className="show">
                             <button id="navbar-search-button" className="btn" type="button" data-toggle="collapse" data-target=".search">
-                                <span className="fa fa-search" />
+                                <span className="fas fa-search" />
                             </button>    
                         </span>
                     </form>

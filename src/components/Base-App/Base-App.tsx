@@ -8,13 +8,15 @@ import './base-app.scss';
 
 import Navbar from './NavBar/Navbar';
 import Home from '../Home/Home';
+import Authorization from '../Authorization/Authorization';
 import BlogCreateForm from '../BlogCreateForm/BlogCreateForm';
+import AdminHome from '../Admin/Admin-Home/Admin-Home';
 
 interface BaseAppProps {
 
 }
 
-interface BaseAppState {
+interface BaseAppState { 
 
 }
 
@@ -25,30 +27,53 @@ export default class BaseApp extends React.Component<BaseAppProps, BaseAppState>
 
             <Router>
 
-                <Navbar />
+                <Switch>
+                    
+                    {
+                    /**
+                     * ADMIN DASHBOARD
+                     */
+                    }
+                    <Route path="/admin">
+                        <AdminHome/>
+                    </Route>
 
-                <div className="container-fluid" style={{height: '3000px' }} id="base-app-container">
+                    {
+                    /**
+                     * SITE BASE
+                     */
+                    }
+                    <Route path="/">
+                        <Navbar />
 
-                    <Switch>
+                        <div className="container-fluid" style={{height: '3000px' }} id="base-app-container">
 
-                        <Route exact path="/">
-                            <Home />    
-                        </Route>
+                            <Switch>
 
-                        <Route path="/about-me">
+                                <Route exact path="/" component={Home} />
 
-                        </Route>
+                                { /* View a specific blog */}
+                                <Route path="/blog/:title" component={BlogCreateForm}/>
 
-                        <Route path="/blog" component={BlogCreateForm} />
+                                { /* View blog detail list */}
+                                <Route path="/blog" component={BlogCreateForm} />
 
-                        <Route> {/* 404 Page */ }
-                            <div>
-                                <h1> 404 Error </h1>
-                            </div>
-                        </Route>
-                    </Switch>
-    
-                </div>
+                                <Route path="/auth" component={Authorization} />
+
+                                {/* 404 Page */}
+                                <Route> 
+                                    <div>
+                                        <h1> 404 Error </h1>
+                                    </div>
+                                </Route>
+
+                            </Switch>
+                        
+                        </div>
+                    
+                    </Route>
+
+                </Switch>
 
             </Router>
         );

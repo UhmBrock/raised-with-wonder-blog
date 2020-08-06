@@ -1,8 +1,22 @@
+/**
+ * External
+ */
 import React from 'react';
-import axios from 'axios';
+import Axios from 'axios';
+/**
+ * Types
+ */
+import type { blogPost } from '../../../rww-backend/dbTypes';
+/**
+ * Components
+ */
+import BlogPreview from '../BlogEntry/BlogPreview';
 import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
-import BlogEntry from '../BlogEntry/BlogEntry';
-
+import Config from '../../externals/config';
+/**
+ * Media/Resources
+ */
+import "./Home.scss";
 import banner_image from '../../images/rww-banner.png';
 
 interface HomeProps {
@@ -10,11 +24,30 @@ interface HomeProps {
 }
 
 interface HomeState {
-
+    blogPosts: Array<blogPost>;
 }
 
 export default class Home extends React.Component<HomeProps, HomeState> {
 
+    constructor(props: HomeProps){
+        super(props);
+
+        this.state = {
+            blogPosts: []
+        };
+        
+    }
+
+    componentDidMount() {
+
+        Axios({
+            method: "GET",
+            url: `${Config.getBackendURL()}/blog/top/3`,
+        }).then(res => {
+            this.setState({blogPosts: res.data});
+        });
+
+    }
 
     render() {
         return (
@@ -22,16 +55,29 @@ export default class Home extends React.Component<HomeProps, HomeState> {
                 <ResponsiveImage elementID="page-header-image" additionalClasses="mb-4" src={banner_image}/>
 
                 <div className="row">
-                    <div className="offset-lg-1 col-lg-6" id="blog-column">
-                        <BlogEntry />
-                    </div>
-                    <div className="offset-lg-1 col-lg-3" id="archive-column">
-                        Archive Column
-                        <p>
-                            { async () => { return await axios.get('localhost:5000/api/getList') }}
-                        </p>
-                    </div>
+                    <div className="offset-lg-1 col-lg-6 border-pink" id="blog-column">
 
+
+                        { 
+                        // Generate the previews for each of the most recent blog posts
+                        this.state.blogPosts.map(
+                            (blogPost) => {
+                                return (
+                                    <BlogPreview blogPost={blogPost} />
+                                );
+                            }
+                        )
+
+                        }
+                    </div>
+                    <div className="offset-lg-1 col-lg-3">
+                        <div className="border-pink my-4" id="about_me_box">
+                            About Me Section
+                        </div>
+                        <div className="border-pink" id="archive_section">
+                            Archive Section
+                        </div>
+                    </div>
                 </div>
             </div>
         )

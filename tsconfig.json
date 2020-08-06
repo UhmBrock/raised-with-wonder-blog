@@ -20,6 +20,6 @@
     "jsx": "react"
   },
   "include": [
-    "src", "rww-backend"
+    "src", "rww-backend", "./rww-backend/*.ts"
   ]
 }

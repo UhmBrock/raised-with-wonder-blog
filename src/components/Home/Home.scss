@@ -1,0 +1,18 @@
+
+$BG_COLOR: #fffbf6;
+$FONT_COLOR: #efc6b4;
+
+.border-pink  {
+    border: 5px $FONT_COLOR solid;
+}
+
+#about_me_box {
+    height: 30vh;
+}
+
+#archive_section {
+    min-height: 40vh;
+    max-height: 65vh;
+}
+
+

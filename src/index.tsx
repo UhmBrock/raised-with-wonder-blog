@@ -13,12 +13,12 @@ import BaseApp from './components/Base-App/Base-App';
 import './css/index.css';
 
 // ts/js imports // 
-import './ts-plugins/no-right-click';
+import './externals/no-right-click';
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <BaseApp/>
+    <BaseApp />
   </React.StrictMode>,
   document.getElementById('root')
 );
