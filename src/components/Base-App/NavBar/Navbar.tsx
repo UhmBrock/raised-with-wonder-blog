@@ -21,7 +21,7 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
 
     render() {
         return (
-            <nav className="navbar nav-pills navbar-light fixed-top navbar-expand-xl"> 
+            <nav id="mainNav" className="navbar nav-pills navbar-light fixed-top navbar-expand-xl"> 
                 <div className="navbar-header">
                     <a className="navbar-brand ml-3" href="/home">
                         raised with wonder

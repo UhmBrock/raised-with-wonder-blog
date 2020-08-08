@@ -2,8 +2,6 @@
     CONTENT STYLE
 ----------------------------------------------------- */
 #content {
-    width: 100%;
-    padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
 }
@@ -21,7 +19,7 @@
         display: block;
         background: #555;
         transition: all 0.8s cubic-bezier(0.810, -0.330, 0.345, 1.375);
-        transition-delay: 0.2s;
+        transition-delay: 0.25s;
 
         &:first-of-type {
             transform: rotate(45deg) translate(2px, 2px);

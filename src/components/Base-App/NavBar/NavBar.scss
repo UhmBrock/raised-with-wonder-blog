@@ -6,7 +6,7 @@ $FONT_COLOR: #fffbf6;
     src: url(../../../assets/Silverberry-Regular.ttf);
 }
 
-.navbar {
+#mainNav {
     background-color: $BG_COLOR;
     
     .navbar-brand, .navbar-brand:hover {
@@ -25,8 +25,8 @@ $FONT_COLOR: #fffbf6;
 }
 
 .active {
-    background-color: $FONT_COLOR !important;
-    color: $BG_COLOR !important;
+    background-color: $FONT_COLOR;
+    color: $BG_COLOR;
 }
 
 .search {
