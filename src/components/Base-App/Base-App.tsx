@@ -9,7 +9,7 @@ import './base-app.scss';
 import Navbar from './NavBar/Navbar';
 import Home from '../Home/Home';
 import Authorization from '../Authorization/Authorization';
-import BlogCreateForm from '../BlogCreateForm/BlogCreateForm';
+import AdminCreateBlog from '../Admin/Admin-Blogs/Admin-CreateBlog/AdminCreateBlog';
 import AdminHome from '../Admin/Admin-Home/Admin-Home';
 
 interface BaseAppProps {
@@ -53,10 +53,10 @@ export default class BaseApp extends React.Component<BaseAppProps, BaseAppState>
                                 <Route exact path="/" component={Home} />
 
                                 { /* View a specific blog */}
-                                <Route path="/blog/:title" component={BlogCreateForm}/>
+                                <Route path="/blog/:title" component={AdminCreateBlog}/>
 
                                 { /* View blog detail list */}
-                                <Route path="/blog" component={BlogCreateForm} />
+                                <Route path="/blog" component={AdminCreateBlog} />
 
                                 <Route path="/auth" component={Authorization} />
 

@@ -10,16 +10,22 @@ interface ASProps {
 const AdminSidebar: FunctionComponent<ASProps> = (props: ASProps) => {
 
     const [sidebarVisible, setSidebarVisible] = useState<boolean>(true);
-    const { path, url } = useRouteMatch();
+    const { path } = useRouteMatch();
     const location = useLocation();
 
-    console.log(path, url)
+    // Decide which submenu should be open
+    const pathSteps = location.pathname.split('/');
+    const imageSubActive = pathSteps[2] === "images";
+    const blogSubActive = pathSteps[2] === "blogs" || (!imageSubActive);
+
+
+    console.log(pathSteps);
 
     return (
-        <div className="nav">
-            <nav id="sidebar" className={sidebarVisible ? "" : "active"}>
+        <div id="sidebar-wrapper" className={"nav " + (sidebarVisible ? "" : "active")}>
+            <nav id="sidebar">
                 <div className="sidebar-header">
-                    <h3>Raised with Wonder</h3>
+                    raised with wonder
                 </div>
 
                 <ul className="list-unstyled components">
@@ -42,22 +48,38 @@ const AdminSidebar: FunctionComponent<ASProps> = (props: ASProps) => {
                             </li>
                         </ul>
                     </li>
-                    <li className={ location.pathname === `${path}/stats` ? "active" : ""}>
+                    <li>
                         <a href={ `${path}/stats`}>Website Statistics</a>
                     </li>
                     <li>
-                        <a id="blogDropdown" href="#blogSubmenu" data-toggle="collapse" aria-expanded="true" className="clearfix">
+                        <a id="blogDropdown" href="#blogSubmenu" data-toggle="collapse" aria-expanded={ blogSubActive ? "true" : "false" } className="clearfix">
                             <span>Manage Blog Posts</span><i className="fas fa-caret-down"/>
                         </a>
-                        <ul className="collapse list-unstyled show" id="blogSubmenu">
+                        <ul className={"collapse list-unstyled " + (blogSubActive ? "show" : "")} id="blogSubmenu">
                             <li>
-                                <a href="#viewBlogs"><i className="fas fa-edit"/> View/Edit Blog Posts</a>
+                                <a href={`${path}/blogs/view`}><i className="fas fa-edit"/> View/Edit Blog Posts</a>
                             </li>
                             <li>
-                                <a href="#publishBlogs"><i className="fas fa-paper-plane"/> Change Publication Status</a>
+                                <a href={`${path}/blogs/publish`}><i className="fas fa-paper-plane"/> Manage Publication Status</a>
                             </li>
                             <li>
-                                <a href="#createBlog"><i className="fas fa-plus"/> Create Blog Post</a>
+                                <a href={`${path}/blogs/create`}><i className="fas fa-plus"/> Create Blog Post</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a id="imageDropdown" href="#imageSubmenu" data-toggle="collapse" aria-expanded={ imageSubActive ? "true" : "false" } className="clearfix">
+                            <span>Manage Images</span><i className="fas fa-caret-down"/>
+                        </a>
+                        <ul className={"collapse list-unstyled " + (imageSubActive ? "show" : "")} id="imageSubmenu">
+                            <li>
+                                <a href={`${path}/images/view`}><i className="fas fa-images"/> View Uploaded Images</a>
+                            </li>
+                            <li>
+                                <a href={`${path}/images/featured`}><i className="fas fa-sliders-h"/> Manage Featured Images</a>
+                            </li>
+                            <li>
+                                <a href={`${path}/images/upload`}><i className="fas fa-upload"/> Upload an Image</a>
                             </li>
                         </ul>
                     </li>

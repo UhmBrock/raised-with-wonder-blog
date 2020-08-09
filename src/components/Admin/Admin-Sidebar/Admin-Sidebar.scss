@@ -1,11 +1,15 @@
-$BG_COLOR_ACTIVE: #045676; // #7386D5;
-$BG_COLOR_BASE: #05668D; // #6D7FCC;
+$BG_COLOR_ACTIVE: #93628C;  // #045676; // #7386D5;
+$BG_COLOR_BASE: #B48EAE; // #05668D; // #6D7FCC;
 
-.wrapper {
-    display: flex;
-    width: 100%;
-    align-items: stretch;
-    perspective: 1500px;
+#sidebar-wrapper {
+    min-width: 326px;
+    max-width: 326px;
+    transition: all 0.5s cubic-bezier(0.945, 0.020, 0.270, 0.665);
+    transform-origin: bottom left;
+
+    &.active {
+        margin-left: -300px;
+    }
 }
 
 #collapse-button {
@@ -14,13 +18,13 @@ $BG_COLOR_BASE: #05668D; // #6D7FCC;
     color: #000000;
     transition: all 0.6s cubic-bezier(0.945, 0.020, 0.270, 0.665);
     transition-delay: 0.2s;
-    transform-origin: top right;
 
     &.active { 
-        background: $BG_COLOR_BASE;
+        background: $BG_COLOR_ACTIVE;
         color: #ffffff;
     }
     
+    // remove bootstrap button styling
     &:focus {
         outline: none;
         box-shadow: none;
@@ -33,16 +37,12 @@ $BG_COLOR_BASE: #05668D; // #6D7FCC;
     max-width: 300px;
     background: $BG_COLOR_BASE;
     color: #fff;
-    transition: all .5s cubic-bezier(0.945, 0.020, 0.270, 0.665);
-    transform-origin: bottom left;
-
-    &.active {
-        margin-left: -300px;
-    }
 
     .sidebar-header {
+        font-family: "Silverberry Script";
+        font-size: 67px;
+        text-align: center;
         padding: 20px;
-        background: $BG_COLOR_BASE;
     }
 
     ul.components {
@@ -83,19 +83,17 @@ $BG_COLOR_BASE: #05668D; // #6D7FCC;
 ul ul a {
     font-size: 0.9em !important;
     padding-left: 30px !important;
-    background: $BG_COLOR_ACTIVE;
 }
 
 a {
 
     &[aria-expanded="true"] {
         color: #fff;
-        background: $BG_COLOR_ACTIVE;
     }
     
 }
 
-#homeDropdown, #blogDropdown {
+#homeDropdown, #blogDropdown, #imageDropdown {
 
     span {
         float: left;
@@ -110,17 +108,15 @@ a {
         transform:  scale(1.25) rotate(-0.25turn);
     }
 }
-/* ---------------------------------------------------
-    MEDIAQUERIES
------------------------------------------------------ */
+
+
+// Automatically collapse the sidebar on small screens
 @media (max-width: 768px) {
-    #sidebar {
+    #sidebar-wrapper {
         margin-left: -300px;
-        transform: rotateY(90deg);
     }
-    #sidebar.active {
-        margin-left: 0;
-        transform: none;
+    #sidebar-wrapper.active {
+        margin-left: 0px;
     }
 
 }

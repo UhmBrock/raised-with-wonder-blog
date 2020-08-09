@@ -1,11 +1,11 @@
 import DatabaseConnection from './db_connect';
-import { Request, Response } from 'express';
 import authRoutes from './routes/auth-routes';
 import blogRoutes from './routes/blog-routes';
 
 const dotenv = require('dotenv');
 const express = require('express');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const pool = DatabaseConnection.getDatabaseConnection();
 const app = express();
 
@@ -16,9 +16,14 @@ dotenv.config();
 // Enable Cross Origin Resource Sharing
 app.use(cors());
 
+// parse various different custom JSON types as JSON
+app.use(bodyParser.json({ type: 'application/*+json' }))
+
+// parse an HTML body into a string
+app.use(bodyParser.text({ type: 'text/html' }))
+
 // Authorization routes
 app.use('/auth', authRoutes);
-
 app.use('/blog', blogRoutes);
 
 // the pool will emit an error on behalf of any idle clients

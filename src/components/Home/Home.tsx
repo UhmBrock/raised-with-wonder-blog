@@ -1,7 +1,7 @@
 /**
  * External
  */
-import React from 'react';
+import React, { useEffect } from 'react';
 import Axios from 'axios';
 /**
  * Types
@@ -10,7 +10,7 @@ import type { blogPost } from '../../../rww-backend/dbTypes';
 /**
  * Components
  */
-import BlogPreview from '../BlogEntry/BlogPreview';
+import BlogPreview from '../BlogPreview/BlogPreview';
 import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
 import Config from '../../externals/config';
 /**
@@ -18,6 +18,7 @@ import Config from '../../externals/config';
  */
 import "./Home.scss";
 import banner_image from '../../images/rww-banner.png';
+import { dbUtilities } from '../../externals/dbTools';
 
 interface HomeProps {
 
@@ -50,6 +51,7 @@ export default class Home extends React.Component<HomeProps, HomeState> {
     }
 
     render() {
+
         return (
             <div>
                 <ResponsiveImage elementID="page-header-image" additionalClasses="mb-4" src={banner_image}/>

@@ -6,12 +6,17 @@ var blog_routes_1 = require("./routes/blog-routes");
 var dotenv = require('dotenv');
 var express = require('express');
 var cors = require('cors');
+var bodyParser = require('body-parser');
 var pool = db_connect_1["default"].getDatabaseConnection();
 var app = express();
 // Read in environment variables
 dotenv.config();
 // Enable Cross Origin Resource Sharing
 app.use(cors());
+// parse various different custom JSON types as JSON
+app.use(bodyParser.json({ type: 'application/*+json' }));
+// parse an HTML body into a string
+app.use(bodyParser.text({ type: 'text/html' }));
 // Authorization routes
 app.use('/auth', auth_routes_1["default"]);
 app.use('/blog', blog_routes_1["default"]);
