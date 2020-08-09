@@ -19,6 +19,8 @@
 .env.test.local
 .env.production.local
 /src/images/Fonts/*
+/rww-backend/*.js
+/rww-backend/*/*.js
 
 npm-debug.log*
 yarn-debug.log*
