@@ -1,6 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { RouteComponentProps, useRouteMatch, useParams } from 'react-router';
-import './AdminCreateBlog.scss';
 import '../../../ResponsiveImage/ResponsiveImage.scss';
 
 // Import TinyMCE
@@ -18,7 +17,7 @@ interface ACBState {
 }
 
 
-const AdminCreateBlog: FunctionComponent<ACBProps> = (props) => {
+const AdminEditBlogContent: FunctionComponent<ACBProps> = (props) => {
     
     const match = useRouteMatch<{title: string}>();
     const [blogPost, setblogPost] = useState<blogPost>({ title: `New Blog Post ${new Date()}`, html: "", date_created: dbUtilities.serializeDate(new Date()), date_modified: dbUtilities.serializeDate(new Date()) }); // TODO Set this to be some actual values
@@ -78,7 +77,6 @@ const AdminCreateBlog: FunctionComponent<ACBProps> = (props) => {
                     onEditorChange={ (content: string, editor: Editor) => {
                         let newBlogpost = blogPost;
                         newBlogpost.html = content;
-
                         setblogPost(newBlogpost);
                     }}
                 />
@@ -105,4 +103,4 @@ const AdminCreateBlog: FunctionComponent<ACBProps> = (props) => {
 
 
 
-export default AdminCreateBlog
+export default AdminEditBlogContent

@@ -9,9 +9,11 @@ import './base-app.scss';
 import Navbar from './NavBar/Navbar';
 import Home from '../Home/Home';
 import Authorization from '../Authorization/Authorization';
-import AdminCreateBlog from '../Admin/Admin-Blogs/Admin-CreateBlog/AdminCreateBlog';
+import AdminEditBlogContent from '../Admin/Admin-Blogs/EditBlog/AdminEditBlog';
 import AdminHome from '../Admin/Admin-Home/Admin-Home';
-
+import BlogPreview from '../Home/BlogPreview/BlogPreview';
+import DisplayBlog from '../DisplayBlog/DisplayBlog';
+ 
 interface BaseAppProps {
 
 }
@@ -53,10 +55,10 @@ export default class BaseApp extends React.Component<BaseAppProps, BaseAppState>
                                 <Route exact path="/" component={Home} />
 
                                 { /* View a specific blog */}
-                                <Route path="/blog/:title" component={AdminCreateBlog}/>
+                                <Route path="/blog/:title" component={DisplayBlog} />
 
                                 { /* View blog detail list */}
-                                <Route path="/blog" component={AdminCreateBlog} />
+                                <Route path="/blog" component={AdminEditBlogContent} />
 
                                 <Route path="/auth" component={Authorization} />
 

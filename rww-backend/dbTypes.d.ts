@@ -6,3 +6,4 @@ export interface blogPost {
     date_modified: string
     [index: string]: string | number
 }
+

@@ -1,9 +1,9 @@
 import React from 'react';
-import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
+import ResponsiveImage from '../../ResponsiveImage/ResponsiveImage';
 
 import blog_image from '../../images/color_swatches.jpg';
-import { blogPost } from '../../../rww-backend/dbTypes';
-import { dbUtilities } from '../../externals/dbTools';
+import { blogPost } from '../../../../rww-backend/dbTypes';
+import { dbUtilities } from '../../../externals/dbTools';
 
 interface BlogPreviewProps {
     blogPost: blogPost

@@ -22,11 +22,12 @@ $FONT_COLOR: #fffbf6;
 #navbar-section-list .nav-link {
     color: $FONT_COLOR;
     font-size: 20px;
-}
+    
+    &.nav-item.active {
+        background-color: $FONT_COLOR;
+        color: $BG_COLOR;
+    }
 
-.active {
-    background-color: $FONT_COLOR;
-    color: $BG_COLOR;
 }
 
 .search {

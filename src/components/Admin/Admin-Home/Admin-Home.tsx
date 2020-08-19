@@ -3,7 +3,8 @@ import AdminSidebar from '../Admin-Sidebar/Admin-Sidebar';
 import "./Admin-Home.scss";
 import { stat } from 'fs';
 import { useLocation, Switch, Route, useRouteMatch } from 'react-router-dom';
-import AdminCreateBlog from '../Admin-Blogs/Admin-CreateBlog/AdminCreateBlog';
+import AdminEditBlogContent from '../Admin-Blogs/EditBlog/AdminEditBlog';
+import AdminViewBlogs from '../Admin-Blogs/VIewBlogs/AdminViewBlogs';
 
 interface AHProps {
 
@@ -25,12 +26,11 @@ const AdminHome: React.FunctionComponent<AHProps> = () => {
                     <Switch> 
 
                         <Route path={`${path}/blogs/view`}>
-                            <h3>On the view tab</h3>
-                            <a href={`${path}/blogs/edit/Test-Blog-Post-2`}> Edit a blog </a>
+                            <AdminViewBlogs />
                         </Route>
 
                         <Route path={`${path}/blogs/edit/:title`}> 
-                            <AdminCreateBlog editMode={true} />
+                            <AdminEditBlogContent editMode={true} />
                         </Route>
 
                         <Route path={`${path}/blogs/publish`}>
@@ -38,7 +38,7 @@ const AdminHome: React.FunctionComponent<AHProps> = () => {
                         </Route>
 
                         <Route path={`${path}/blogs/create`}>
-                            <AdminCreateBlog editMode={false}/>
+                            <AdminEditBlogContent editMode={false}/>
                         </Route>
                             
                         <Route path={`${path}/images/view`}>
