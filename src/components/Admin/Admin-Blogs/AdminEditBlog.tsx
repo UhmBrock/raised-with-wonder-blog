@@ -1,13 +1,13 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
 import { RouteComponentProps, useRouteMatch, useParams } from 'react-router';
-import '../../../ResponsiveImage/ResponsiveImage.scss';
+import "../../../css/ResponsiveImage.scss";
 
 // Import TinyMCE
 import { Editor } from '@tinymce/tinymce-react';
-import {dbRequest, dbUtilities} from '../../../../externals/dbTools';
-import Config from '../../../../externals/config';
+import {dbRequest, dbUtilities} from '../../../externals/dbTools';
+import Config from '../../../externals/config';
 import Axios from 'axios';
-import { blogPost } from '../../../../../rww-backend/dbTypes';
+import { blogPost } from '../../../../rww-backend/dbTypes';
 
 interface ACBProps {
     editMode?: boolean;

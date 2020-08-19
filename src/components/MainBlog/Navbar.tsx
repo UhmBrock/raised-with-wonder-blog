@@ -2,7 +2,7 @@ import React from 'react';
 import {
     NavLink
 } from 'react-router-dom';
-import './NavBar.scss';
+import '../../css/NavBar.scss';
 
 const YOUTUBE_LINK = "https://www.youtube.com/channel/UCHc75m64K2PbIEjgJXZPNEg?view_as=subscriber";
 const INSTAGRAM_LINK = "https://www.instagram.com/raisedwithwonder/";

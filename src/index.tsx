@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.bundle';
 
 // Component Imports
-import BaseApp from './components/Base-App/Base-App';
+import BaseApp from './components/MainBlog/Base-App';
 
 // Css imports //
 import './css/index.css';

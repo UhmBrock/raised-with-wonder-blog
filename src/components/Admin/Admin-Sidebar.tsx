@@ -1,6 +1,6 @@
 import React, { FunctionComponent, useState } from 'react';
 
-import "./Admin-Sidebar.scss";
+import "../../css/Admin-Sidebar.scss";
 import { useLocation, useRouteMatch } from 'react-router-dom';
 
 interface ASProps {

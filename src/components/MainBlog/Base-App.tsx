@@ -4,15 +4,15 @@ import {
     Switch,
     Route
 } from 'react-router-dom';
-import './base-app.scss';
+import "../../css/base-app.scss";
 
-import Navbar from './NavBar/Navbar';
-import Home from '../Home/Home';
+import Navbar from './Navbar';
+import Home from './Home';
 import Authorization from '../Authorization/Authorization';
-import AdminEditBlogContent from '../Admin/Admin-Blogs/EditBlog/AdminEditBlog';
-import AdminHome from '../Admin/Admin-Home/Admin-Home';
-import BlogPreview from '../Home/BlogPreview/BlogPreview';
-import DisplayBlog from '../DisplayBlog/DisplayBlog';
+import AdminEditBlogContent from '../Admin/Admin-Blogs/AdminEditBlog';
+import AdminHome from '../Admin/Admin-Home';
+import BlogPreview from './BlogPreview';
+import DisplayBlog from './DisplayBlog';
  
 interface BaseAppProps {
 

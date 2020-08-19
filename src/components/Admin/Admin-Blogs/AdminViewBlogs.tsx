@@ -1,9 +1,9 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import type { blogPost } from '../../../../../rww-backend/dbTypes';
+import type { blogPost } from '../../../../rww-backend/dbTypes';
 import React, { useEffect, useState } from 'react';
-import DataTable from '../../../Table/Table';
-import { dbRequest, dbUtilities } from '../../../../externals/dbTools';
-import Config from '../../../../externals/config';
+import DataTable from '../../Table/Table';
+import { dbRequest, dbUtilities } from '../../../externals/dbTools';
+import Config from '../../../externals/config';
 
 interface ViewProps {
 

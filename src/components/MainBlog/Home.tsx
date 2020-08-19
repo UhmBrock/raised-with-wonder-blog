@@ -10,13 +10,13 @@ import type { blogPost } from '../../../rww-backend/dbTypes';
 /**
  * Components
  */
-import BlogPreview from './BlogPreview/BlogPreview';
+import BlogPreview from './BlogPreview';
 import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
 import Config from '../../externals/config';
 /**
  * Media/Resources
  */
-import "./Home.scss";
+import "../../css/Home.scss";
 import banner_image from '../../images/rww-banner.png';
 import { dbUtilities } from '../../externals/dbTools';
 

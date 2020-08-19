@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import AdminSidebar from '../Admin-Sidebar/Admin-Sidebar';
-import "./Admin-Home.scss";
+import AdminSidebar from './Admin-Sidebar';
+import "../../css/Admin-Home.scss";
 import { stat } from 'fs';
 import { useLocation, Switch, Route, useRouteMatch } from 'react-router-dom';
-import AdminEditBlogContent from '../Admin-Blogs/EditBlog/AdminEditBlog';
-import AdminViewBlogs from '../Admin-Blogs/VIewBlogs/AdminViewBlogs';
+import AdminEditBlogContent from './Admin-Blogs/AdminEditBlog';
+import AdminViewBlogs from './Admin-Blogs/AdminViewBlogs';
 
 interface AHProps {
 

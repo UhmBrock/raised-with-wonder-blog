@@ -1,5 +1,5 @@
 import React from 'react';
-import './ResponsiveImage.scss';
+import '../../css/ResponsiveImage.scss';
 
 interface ResponsiveImageProps {
     elementID?: string;
