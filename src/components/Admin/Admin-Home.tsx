@@ -3,8 +3,9 @@ import AdminSidebar from './Admin-Sidebar';
 import "../../css/Admin-Home.scss";
 import { stat } from 'fs';
 import { useLocation, Switch, Route, useRouteMatch } from 'react-router-dom';
-import AdminEditBlogContent from './Admin-Blogs/AdminEditBlog';
+import AdminEditBlogContent from './Admin-Blogs/AdminEditBlogContent';
 import AdminViewBlogs from './Admin-Blogs/AdminViewBlogs';
+import AdminEditBlogDetail from './Admin-Blogs/AdminEditBlogDetail';
 
 interface AHProps {
 
@@ -25,22 +26,27 @@ const AdminHome: React.FunctionComponent<AHProps> = () => {
             <div id="content">
                     <Switch> 
 
+                        { /** View table of all blogs */}
                         <Route path={`${path}/blogs/view`}>
                             <AdminViewBlogs />
                         </Route>
 
+                        { /** Edit an existing blog document */}
+                        <Route path={`${path}/blogs/create/:title`}>
+                            <AdminEditBlogDetail editMode={false}/>
+                        </Route>
+
+                        { /** Create a new blog document */}
+                        <Route path={`${path}/blogs/create/`}>
+                            <AdminEditBlogDetail editMode={false}/>
+                        </Route>
+                        
+                        { /** Edit a blog post */}
                         <Route path={`${path}/blogs/edit/:title`}> 
                             <AdminEditBlogContent editMode={true} />
                         </Route>
-
-                        <Route path={`${path}/blogs/publish`}>
-                            <h3> On the publish page</h3>
-                        </Route>
-
-                        <Route path={`${path}/blogs/create`}>
-                            <AdminEditBlogContent editMode={false}/>
-                        </Route>
                             
+                        
                         <Route path={`${path}/images/view`}>
                             <h3>On the view images tab</h3>
                             <p> This page will contain a gallery with controls to delete /copy urls for images </p> 

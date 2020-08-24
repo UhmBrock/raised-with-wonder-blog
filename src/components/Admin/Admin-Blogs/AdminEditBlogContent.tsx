@@ -1,5 +1,5 @@
 import React, { FunctionComponent, useState, useEffect } from 'react';
-import { RouteComponentProps, useRouteMatch, useParams } from 'react-router';
+import { useRouteMatch } from 'react-router';
 import "../../../css/ResponsiveImage.scss";
 
 // Import TinyMCE
@@ -7,14 +7,13 @@ import { Editor } from '@tinymce/tinymce-react';
 import {dbRequest, dbUtilities} from '../../../externals/dbTools';
 import Config from '../../../externals/config';
 import Axios from 'axios';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { blogPost } from '../../../../rww-backend/dbTypes';
 
 interface ACBProps {
     editMode?: boolean;
 }
 
-interface ACBState {
-}
 
 
 const AdminEditBlogContent: FunctionComponent<ACBProps> = (props) => {
@@ -74,7 +73,7 @@ const AdminEditBlogContent: FunctionComponent<ACBProps> = (props) => {
                     
                     textareaName="blogEditor"
                     outputFormat="html"
-                    onEditorChange={ (content: string, editor: Editor) => {
+                    onEditorChange={ (content: string) => {
                         let newBlogpost = blogPost;
                         newBlogpost.html = content;
                         setblogPost(newBlogpost);

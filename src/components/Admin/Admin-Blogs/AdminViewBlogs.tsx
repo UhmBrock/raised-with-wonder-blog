@@ -13,7 +13,8 @@ interface TableData {
     "Title": string;
     "Published": string;
     "View": JSX.Element;
-    "Edit": JSX.Element;
+    "Edit Document": JSX.Element;
+    "Edit Post": JSX.Element;
     "Date Created": string;
     "Date Modified": string;
 }
@@ -31,7 +32,8 @@ const AdminViewBlogs: React.FunctionComponent<ViewProps> = () => {
                     "Title": dbUtilities.deserializeTitle(blogPost.title),
                     "Published": "True", // TODO
                     "View": <a href={`${Config.getFrontendURL()}/blog/${blogPost.title}`}>View Post</a>,
-                    "Edit": <a href={`${Config.getFrontendURL()}/admin/blogs/edit/${blogPost.title}`}>Edit Post</a>,
+                    "Edit Document": <a href={`${Config.getFrontendURL()}/admin/blogs/create/${blogPost.title}`}>Edit Document</a>,
+                    "Edit Post": <a href={`${Config.getFrontendURL()}/admin/blogs/edit/${blogPost.title}`}>Edit Post</a>,
                     "Date Created": dbUtilities.getPrettyDate(blogPost.date_created),
                     "Date Modified": dbUtilities.getPrettyDate(blogPost.date_modified)
                 }

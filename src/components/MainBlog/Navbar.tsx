@@ -36,7 +36,7 @@ export default class Navbar extends React.Component<NavbarProps, NavbarState> {
                 <div className="collapse navbar-collapse w-75">
                     <div className="navbar-nav mx-auto" id="navbar-section-list"> 
                         <NavLink exact to="/" activeClassName="active" className="nav-item nav-link">Home</NavLink>
-                        <NavLink to="/blog" activeClassName="active" className="nav-item nav-link">Blog</NavLink>
+                        <NavLink to="/blogs" activeClassName="active" className="nav-item nav-link">Blog</NavLink>
                         <NavLink to="/ophiebee" activeClassName="active" className="nav-item nav-link">OphieBee</NavLink>
                         <NavLink to="/homeschool" activeClassName="active" className="nav-item nav-link">Homeschool</NavLink>
                         <NavLink to="/admin" activeClassName="active" className="nav-item nav-link">Admin</NavLink> { /* TODO Remove this */ }

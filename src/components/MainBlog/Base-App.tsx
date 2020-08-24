@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     BrowserRouter as Router,
     Switch,
     Route
 } from 'react-router-dom';
+
 import "../../css/base-app.scss";
+import "../../css/Home.scss";
+
+import banner_image from '../../images/rww-banner.png';
 
 import Navbar from './Navbar';
-import Home from './Home';
-import Authorization from '../Authorization/Authorization';
-import AdminEditBlogContent from '../Admin/Admin-Blogs/AdminEditBlog';
+import AdminEditBlogContent from '../Admin/Admin-Blogs/AdminEditBlogContent';
 import AdminHome from '../Admin/Admin-Home';
 import BlogPreview from './BlogPreview';
 import DisplayBlog from './DisplayBlog';
+import { blogPost } from '../../../rww-backend/dbTypes';
+import Axios from 'axios';
+import Config from '../../externals/config';
+import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
  
 interface BaseAppProps {
 
@@ -22,62 +28,117 @@ interface BaseAppState {
 
 }
 
-export default class BaseApp extends React.Component<BaseAppProps, BaseAppState> {
+const BaseApp: React.FunctionComponent<BaseAppProps> = () => {
 
-    render() { 
-        return (
+    const [blogPosts, setBlogPosts] = useState<blogPost[]>([]);
 
-            <Router>
+    useEffect(() => {
+        Axios({
+            method: "GET",
+            url: `${Config.getBackendURL()}/blog/top/2`,
+        }).then(res => {
+            setBlogPosts(res.data);
+        });
+    }, []);
 
-                <Switch>
-                    
-                    {
-                    /**
-                     * ADMIN DASHBOARD
-                     */
-                    }
-                    <Route path="/admin">
-                        <AdminHome/>
-                    </Route>
+    return (
 
-                    {
-                    /**
-                     * SITE BASE
-                     */
-                    }
-                    <Route path="/">
-                        <Navbar />
+        <Router>
 
-                        <div className="container-fluid" style={{height: '3000px' }} id="base-app-container">
+            <Switch>
+                
+                {/** ADMIN DASHBOARD */}
+                <Route path="/admin">
+                    <AdminHome/>
+                </Route>
 
+                { /* View a specific blog */}
+                <Route path="/blog/:title" component={DisplayBlog} />
+
+                { /* View blog detail list */}
+                <Route path="/list-blogs" component={AdminEditBlogContent} />
+
+                { /* Home page, sub switch renders what blogs show in the left-most column */ }
+                <Route path="/">
+
+                    <Navbar />
+
+                    <div className="container-fluid" id="base-app-container">
+
+                        <div>
                             <Switch>
+                                <Route exact path="/">
+                                    <ResponsiveImage elementID="page-header-image" additionalClasses="mb-4" src={banner_image}/>
+                                </Route>
 
-                                <Route exact path="/" component={Home} />
+                                <Route path="/blogs">
+                                    <ResponsiveImage elementID="page-header-image" additionalClasses="mb-4" src={banner_image}/>
+                                </Route>
 
-                                { /* View a specific blog */}
-                                <Route path="/blog/:title" component={DisplayBlog} />
-
-                                { /* View blog detail list */}
-                                <Route path="/blog" component={AdminEditBlogContent} />
-
-                                <Route path="/auth" component={Authorization} />
-
-                                {/* 404 Page */}
-                                <Route> 
-                                    <div>
-                                        <h1> 404 Error </h1>
-                                    </div>
+                                <Route path="/ophiebee">
+                                    { /* All business blogs */ }
+                                </Route>
+                                
+                                <Route path="/homeschool">
+                                    { /* All business blogs */ }
                                 </Route>
 
                             </Switch>
-                        
+
+                            <div className="row">
+                                <div className="offset-lg-1 col-lg-6 border-pink" id="blog-column">
+
+                                    <Switch>
+                                        <Route exact path="/">
+                                            { blogPosts.map( (blogPost) => <BlogPreview blogPost={blogPost}/>)}
+                                        </Route>
+
+                                        <Route path="/blogs">
+                                            { /* All personal blogs */ }
+                                        </Route>
+
+                                        <Route path="/ophiebee">
+                                            { /* All business blogs */ }
+                                        </Route>
+                                        
+                                        <Route path="/ophiebee">
+                                            { /* All business blogs */ }
+                                        </Route>
+
+                                    </Switch>
+
+
+                                </div>
+                                <div className="offset-lg-1 col-lg-3">
+                                    <div className="border-pink my-4" id="about_me_box">
+                                        About Me Section
+                                    </div>
+                                    <div className="border-pink" id="archive_section">
+                                        Archive Section
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="row my-5">
+                                <h1 className="mx-auto"> Most Popular Posts by View Count</h1>
+                            </div>
+                            <div className="row my-5">
+                                <h1 className="col border-pink">Blog Post 1 Featured image, and title</h1>
+                                <h1 className="col border-pink">Blog Post 2 Featured image, and title</h1>
+                                <h1 className="col border-pink">Blog Post 3 Featured image, and title</h1>
+                            </div>
                         </div>
-                    
-                    </Route>
+                        <footer style={{backgroundColor: "pink", height: '300px'}}>
+                            Footer stuff goes here    
+                        </footer>                    
+                    </div>
+                
+                </Route>
 
-                </Switch>
+            </Switch>
 
-            </Router>
-        );
-    }
+        </Router>
+    );
 }
+
+export default BaseApp;
