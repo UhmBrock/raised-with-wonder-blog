@@ -18,9 +18,6 @@ const AdminSidebar: FunctionComponent<ASProps> = (props: ASProps) => {
     const imageSubActive = pathSteps[2] === "images";
     const blogSubActive = pathSteps[2] === "blogs" || (!imageSubActive);
 
-
-    console.log(pathSteps);
-
     return (
         <div id="sidebar-wrapper" className={"nav " + (sidebarVisible ? "" : "active")}>
             <nav id="sidebar">

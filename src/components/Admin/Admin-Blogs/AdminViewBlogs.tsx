@@ -24,7 +24,7 @@ const AdminViewBlogs: React.FunctionComponent<ViewProps> = () => {
     const [tableData, setTableData] = useState<TableData[]>([])
 
     useEffect( () => {
-        dbRequest.getAllBlogs()
+        dbRequest.Blogs.getAll()
         .then( (response) => {
 
             const newTableData: TableData[] = response.data.map( (blogPost: blogPost) => {

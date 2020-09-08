@@ -4,7 +4,7 @@ import "../../../css/ResponsiveImage.scss";
 
 // Import TinyMCE
 import { Editor } from '@tinymce/tinymce-react';
-import {dbRequest, dbUtilities} from '../../../externals/dbTools';
+import {dbRequest, dbUtilities, dbDefaults} from '../../../externals/dbTools';
 import Config from '../../../externals/config';
 import Axios from 'axios';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -19,13 +19,13 @@ interface ACBProps {
 const AdminEditBlogContent: FunctionComponent<ACBProps> = (props) => {
     
     const match = useRouteMatch<{title: string}>();
-    const [blogPost, setblogPost] = useState<blogPost>({ title: `New Blog Post ${new Date()}`, html: "", date_created: dbUtilities.serializeDate(new Date()), date_modified: dbUtilities.serializeDate(new Date()) }); // TODO Set this to be some actual values
+    const [blogPost, setblogPost] = useState<blogPost>(dbDefaults.blogPost_default()); // TODO Set this to be some actual values
 
     useEffect(() => {
         // Only query if we are in edit mode
         if(props.editMode) {
             
-            dbRequest.getBlog(match.params.title)
+            dbRequest.Blogs.get(match.params.title)
             .then( (response) => {
                 setblogPost(response.data);
             })

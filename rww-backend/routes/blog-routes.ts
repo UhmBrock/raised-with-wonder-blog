@@ -1,6 +1,9 @@
 import type { Request, Response } from 'express-serve-static-core';
 import DatabaseConnection from '../db_connect';
-import { blogPost } from '../dbTypes';
+import { blogPost, publishing_location } from '../dbTypes';
+import { route } from 'express/lib/application';
+import { QueryResult } from 'pg';
+import { dbUtilities } from '../../src/externals/dbTools';
 
 
 const bodyParser = require('body-parser');
@@ -22,7 +25,7 @@ pool.on('error', (err, client) => {
 router.get('/all/', (req: Request, res: Response) => {
     pool.query(
         "SELECT * from blogs", [], 
-        (err, result) => {
+        (err, result: QueryResult<blogPost[]>) => {
             if(err) {
                 throw err;
             }
@@ -38,7 +41,7 @@ router.get('/all/', (req: Request, res: Response) => {
 router.get('/top/:number', (req: Request, res: Response) => {
     pool.query(
         "SELECT * FROM blogs ORDER BY date_created LIMIT $1", [req.params["number"]],
-        (err, result) => {
+        (err, result: QueryResult<blogPost[]>) => {
             if(err) {
                 throw err;
             }
@@ -53,7 +56,7 @@ router.get('/top/:number', (req: Request, res: Response) => {
 router.get('/:blogTitle', (req: Request, res: Response) => {
     pool.query(
         "SELECT * from blogs WHERE title=$1", [req.params["blogTitle"]],
-        (err, result) => {
+        (err, result: QueryResult<blogPost>) => {
             if(err) {
                 throw err;
             }
@@ -63,6 +66,24 @@ router.get('/:blogTitle', (req: Request, res: Response) => {
             }
 
             res.json(result.rows[0]);
+        }
+    )
+});
+
+// /blog/{title}/publishedIn
+// ---- Get a specific blog, return only the locations IDs it is published in
+router.get('/:blogTitle/publishedIn', (req: Request, res: Response) => {
+    pool.query(
+        "SELECT pub.* FROM blogs " +
+        "LEFT OUTER JOIN blogs_publishing_locations_m2m m2m ON m2m.blogid = blogs.id " +
+        "LEFT OUTER JOIN publishing_locations pub ON pub.id = m2m.locationid " +
+        "WHERE blogs.title = $1", [req.params["blogTitle"]],
+        (err, result: QueryResult<publishing_location[]>) => {
+            if(err) {
+                throw err;
+            }
+
+            res.json(result.rows);
         }
     )
 });
@@ -79,7 +100,12 @@ router.post('/upload', bodyParser.json(), (req: Request, res: Response) => {
     let queryString = "";
     let {id, ...allExceptID} = blogPost;
 
+    
     if(!editMode) { // Creating a new blog post
+
+        blogPost.date_created = dbUtilities.serializeDate(new Date(Date.now()));
+        blogPost.date_modified = dbUtilities.serializeDate(new Date());
+
 
         let columns = Object.keys(allExceptID).join(", ");
         let values = Object.values(allExceptID).join("', '");
@@ -87,6 +113,8 @@ router.post('/upload', bodyParser.json(), (req: Request, res: Response) => {
         queryString = `INSERT INTO blogs ( ${columns} ) VALUES ( '${values}' );`;
 
     } else { // Editing an existing blog post
+
+        blogPost.date_modified = dbUtilities.serializeDate(new Date());
 
         let setValues: string[] = [];
 

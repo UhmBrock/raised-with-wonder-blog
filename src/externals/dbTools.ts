@@ -1,40 +1,141 @@
 import { AxiosPromise } from 'axios';
 import Config from './config';
 import Axios from 'axios';
-import { blogPost } from '../../rww-backend/dbTypes';
+import { blogPost, tag, publishing_location } from '../../rww-backend/dbTypes';
 
 export class dbRequest {
 
     /**
-     * Gets the specific blog, found by filtering for title
-     * @param title The title of the blog in pretty format
+     * All DB methods for handling Blogs
      */
-    public static getBlog(title: string): AxiosPromise<blogPost> {
+    public static Blogs = {
+        /**
+         * Gets the specific blog, found by filtering for title
+         * @param title The title of the blog in pretty format
+         */
+        get(title: string): AxiosPromise<blogPost> {
+    
+            return Axios(
+                { 
+                    method: "GET", 
+                    baseURL: Config.getBackendURL(), 
+                    responseType: "json",
+                    url: `/blog/${title}`,
+                }
+            );
+    
+        },
+    
+        /**
+         * Gets all blogs, no conditions
+         */
+        getAll(): AxiosPromise<blogPost[]> {
+    
+            return Axios(
+                { 
+                    method: "GET", 
+                    baseURL: Config.getBackendURL(), 
+                    responseType: "json",
+                    url: `/blog/all`,
+                }
+            );
+    
+        },
 
-        return Axios(
-            { 
-                method: "GET", 
-                baseURL: Config.getBackendURL(), 
-                responseType: "json",
-                url: `/blog/${title}`,
-            }
-        );
+        /**
+         * Gets the IDs of the locations the blog is published in
+         */
+        getPublishedLocations(title: string): AxiosPromise<publishing_location[]> {
 
-    }
+            return Axios(
+                {
+                    method: "GET",
+                    baseURL: Config.getBackendURL(),
+                    responseType: "json",
+                    url: `/blog/${title}/publishedIn`
+                }
+            );
+
+        }
+
+
+
+    };   
 
     /**
-     * Gets all blogs, no conditions
+     * All DB methods for handling tags
      */
-    public static getAllBlogs(): AxiosPromise<blogPost[]> {
+    public static Tags = {
 
-        return Axios(
-            { 
-                method: "GET", 
-                baseURL: Config.getBackendURL(), 
-                responseType: "json",
-                url: `/blog/all`,
-            }
-        );
+        /**
+         * Gets the specific tag, found by filtering for id
+         * @param id The id of the tag
+         */
+        get(id: number): AxiosPromise<tag> {
+    
+            return Axios(
+                { 
+                    method: "GET", 
+                    baseURL: Config.getBackendURL(), 
+                    responseType: "json",
+                    url: `/tag/${id}`,
+                }
+            );
+    
+        },
+    
+        /**
+         * Gets all tags, no conditions
+         */
+        getAll(): AxiosPromise<tag[]> {
+    
+            return Axios(
+                { 
+                    method: "GET", 
+                    baseURL: Config.getBackendURL(), 
+                    responseType: "json",
+                    url: `/tag/all`,
+                }
+            );
+    
+        }
+
+    };
+
+    public static PublishLocations = {
+
+        /**
+         * Gets the specific tag, found by filtering for id
+         * @param id The id of the tag
+         */
+        get(id: number): AxiosPromise<publishing_location> {
+    
+            return Axios(
+                { 
+                    method: "GET", 
+                    baseURL: Config.getBackendURL(), 
+                    responseType: "json",
+                    url: `/publish/${id}`,
+                }
+            );
+    
+        },
+    
+        /**
+         * Gets all tags, no conditions
+         */
+        getAll(): AxiosPromise<publishing_location[]> {
+    
+            return Axios(
+                { 
+                    method: "GET", 
+                    baseURL: Config.getBackendURL(), 
+                    responseType: "json",
+                    url: `/publish/all`,
+                }
+            );
+    
+        }
 
     }
 
@@ -70,8 +171,8 @@ export class dbUtilities {
     public static serializeDate(date: Date): string {        
     
         // toISOString converts to UTC, this offsets that. 
-        const timezoneOffset_hours = date.getTimezoneOffset() / 60;
-        date.setHours(date.getHours() - timezoneOffset_hours);
+        // const timezoneOffset_hours = date.getTimezoneOffset() / 60;
+        // date.setHours(date.getHours() - timezoneOffset_hours);
         
         return date.toISOString();
 
@@ -133,15 +234,29 @@ export class dbUtilities {
 
 export class dbDefaults {
     /**
- * The default values for a new blogPost. Defined here for consistency across the web app.
- */
+     * The default values for a new blogPost. Defined here for consistency across the web app.
+     */
     public static blogPost_default(): blogPost {
         return {
             // No ID by default
             title: "BlogPost " + new Date().toISOString(),
+            featured_image: "",
+            excerpt: "",
             html: "",
             date_created: dbUtilities.serializeDate(new Date()),
             date_modified: dbUtilities.serializeDate(new Date())
+        }
+    }
+
+    public static tag_default(): tag {
+        return {
+            tag_name: ""
+        }
+    }
+
+    public static publishing_location_default(): publishing_location {
+        return {
+            location_name: ""
         }
     }
 }

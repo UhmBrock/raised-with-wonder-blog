@@ -15,10 +15,11 @@ import AdminEditBlogContent from '../Admin/Admin-Blogs/AdminEditBlogContent';
 import AdminHome from '../Admin/Admin-Home';
 import BlogPreview from './BlogPreview';
 import DisplayBlog from './DisplayBlog';
-import { blogPost } from '../../../rww-backend/dbTypes';
+import { blogPost, tag } from '../../../rww-backend/dbTypes';
 import Axios from 'axios';
 import Config from '../../externals/config';
 import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
+import { dbRequest } from '../../externals/dbTools';
  
 interface BaseAppProps {
 
@@ -35,11 +36,13 @@ const BaseApp: React.FunctionComponent<BaseAppProps> = () => {
     useEffect(() => {
         Axios({
             method: "GET",
-            url: `${Config.getBackendURL()}/blog/top/2`,
+            url: `${Config.getBackendURL()}/blog/top/3`,
         }).then(res => {
             setBlogPosts(res.data);
         });
     }, []);
+
+
 
     return (
 
@@ -51,9 +54,6 @@ const BaseApp: React.FunctionComponent<BaseAppProps> = () => {
                 <Route path="/admin">
                     <AdminHome/>
                 </Route>
-
-                { /* View a specific blog */}
-                <Route path="/blog/:title" component={DisplayBlog} />
 
                 { /* View blog detail list */}
                 <Route path="/list-blogs" component={AdminEditBlogContent} />
@@ -76,11 +76,11 @@ const BaseApp: React.FunctionComponent<BaseAppProps> = () => {
                                 </Route>
 
                                 <Route path="/ophiebee">
-                                    { /* All business blogs */ }
+                                    { /* Business banner image */ }
                                 </Route>
                                 
                                 <Route path="/homeschool">
-                                    { /* All business blogs */ }
+                                    { /* Homeschool banner image */ }
                                 </Route>
 
                             </Switch>
@@ -90,8 +90,14 @@ const BaseApp: React.FunctionComponent<BaseAppProps> = () => {
 
                                     <Switch>
                                         <Route exact path="/">
-                                            { blogPosts.map( (blogPost) => <BlogPreview blogPost={blogPost}/>)}
+                                            { blogPosts.map( (blogPost) => <DisplayBlog displayExcerpt={false} blogTitle={blogPost.title}/>)}
                                         </Route>
+
+                                        { /* View a specific blog */}
+                                        <Route path="/blog/:title" render={
+                                            props => <DisplayBlog displayExcerpt={false} blogTitle={props.match.params.title}/>
+                                        }/>
+                                            
 
                                         <Route path="/blogs">
                                             { /* All personal blogs */ }
@@ -101,8 +107,8 @@ const BaseApp: React.FunctionComponent<BaseAppProps> = () => {
                                             { /* All business blogs */ }
                                         </Route>
                                         
-                                        <Route path="/ophiebee">
-                                            { /* All business blogs */ }
+                                        <Route path="/homeschool">
+                                            { /* All homeschool blogs */ }
                                         </Route>
 
                                     </Switch>

@@ -1,6 +1,8 @@
 import DatabaseConnection from './db_connect';
 import authRoutes from './routes/auth-routes';
 import blogRoutes from './routes/blog-routes';
+import tagRoutes from './routes/tag-routes';
+import publishRoutes from './routes/publish-routes';
 
 const dotenv = require('dotenv');
 const express = require('express');
@@ -25,6 +27,8 @@ app.use(bodyParser.text({ type: 'text/html' }))
 // Authorization routes
 app.use('/auth', authRoutes);
 app.use('/blog', blogRoutes);
+app.use('/tag', tagRoutes);
+app.use('/publish', publishRoutes);
 
 // the pool will emit an error on behalf of any idle clients
 // it contains if a backend error or network partition happens

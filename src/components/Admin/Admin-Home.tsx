@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminSidebar from './Admin-Sidebar';
 import "../../css/Admin-Home.scss";
 import { stat } from 'fs';
@@ -6,6 +6,8 @@ import { useLocation, Switch, Route, useRouteMatch } from 'react-router-dom';
 import AdminEditBlogContent from './Admin-Blogs/AdminEditBlogContent';
 import AdminViewBlogs from './Admin-Blogs/AdminViewBlogs';
 import AdminEditBlogDetail from './Admin-Blogs/AdminEditBlogDetail';
+import { tag } from '../../../rww-backend/dbTypes';
+import { dbRequest } from '../../externals/dbTools';
 
 interface AHProps {
 
@@ -41,6 +43,13 @@ const AdminHome: React.FunctionComponent<AHProps> = () => {
                             <AdminEditBlogDetail editMode={false}/>
                         </Route>
                         
+                        { /** Edit an existing blog document */}
+                        <Route path={`${path}/blogs/publish`}>
+                            <div>
+                                Test
+                            </div>
+                        </Route>
+
                         { /** Edit a blog post */}
                         <Route path={`${path}/blogs/edit/:title`}> 
                             <AdminEditBlogContent editMode={true} />

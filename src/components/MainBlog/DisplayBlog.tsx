@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { dbRequest } from '../../externals/dbTools';
+import { dbRequest, dbUtilities } from '../../externals/dbTools';
 import { blogPost } from '../../../rww-backend/dbTypes';
 
 interface displayBlogProps {
-
+    displayExcerpt: boolean,
+    blogTitle: string
 }
 
 const DisplayBlog: React.FunctionComponent<displayBlogProps> = (props: displayBlogProps) => {
     
-    const match = useRouteMatch<{title: string}>();
     const [blogPost, setblogPost] = useState<blogPost>(); 
+    const [displayFull, setDisplayFull] = useState<boolean>(!props.displayExcerpt);
 
     useEffect(() => {
-        dbRequest.getBlog(match.params.title)
+        dbRequest.Blogs.get(props.blogTitle)
         .then( (response) => {
             setblogPost(response.data);
         })
@@ -23,13 +24,35 @@ const DisplayBlog: React.FunctionComponent<displayBlogProps> = (props: displayBl
                 return;
             }
         });
-    }, [match.params.title]);
+    }, [props.blogTitle]);
+
+    if(blogPost === undefined) {
+        return <div></div>
+    }
 
     return (
-        <div className="container">
-            {blogPost !== undefined 
-            ? <div dangerouslySetInnerHTML={ {__html: blogPost.html} } />
-            : <h1>404</h1> }
+        <div>
+
+            <h2>{dbUtilities.deserializeTitle(blogPost.title)}</h2>
+            <h3>{dbUtilities.getPrettyDate(blogPost.date_created)}</h3>
+            <h3>{dbUtilities.getPrettyDate(blogPost.date_modified)}</h3>
+            
+            {
+                () => {
+
+                    if(displayFull) {
+                        return (<div dangerouslySetInnerHTML={ {__html: blogPost.html}} />);
+                    } else {
+                        return (
+                            <div>
+                                <div dangerouslySetInnerHTML={ {__html: blogPost.excerpt }}/>
+                                <button type="button" onClick={ () => setDisplayFull(true) }>Read More</button>
+                            </div>
+                        );
+                    }
+                }
+            }
+
         </div>
 
     )
