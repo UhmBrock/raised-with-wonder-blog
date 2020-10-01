@@ -15,6 +15,7 @@ interface TableData {
     "View": JSX.Element;
     "Edit Document": JSX.Element;
     "Edit Post": JSX.Element;
+    "Delete Post": JSX.Element;
     "Date Created": string;
     "Date Modified": string;
 }
@@ -34,6 +35,7 @@ const AdminViewBlogs: React.FunctionComponent<ViewProps> = () => {
                     "View": <a href={`${Config.getFrontendURL()}/blog/${blogPost.title}`}>View Post</a>,
                     "Edit Document": <a href={`${Config.getFrontendURL()}/admin/blogs/create/${blogPost.title}`}>Edit Document</a>,
                     "Edit Post": <a href={`${Config.getFrontendURL()}/admin/blogs/edit/${blogPost.title}`}>Edit Post</a>,
+                    "Delete Post": <a href={`${Config.getFrontendURL()}/admin/blogs/delete/${blogPost.title}`}>Delete Post</a>,
                     "Date Created": dbUtilities.getPrettyDate(blogPost.date_created),
                     "Date Modified": dbUtilities.getPrettyDate(blogPost.date_modified)
                 }

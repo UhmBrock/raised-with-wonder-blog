@@ -4,10 +4,9 @@ import "../../../css/ResponsiveImage.scss";
 
 // Import TinyMCE
 import { Editor } from '@tinymce/tinymce-react';
-import {dbRequest, dbUtilities, dbDefaults} from '../../../externals/dbTools';
+import {dbRequest, dbDefaults} from '../../../externals/dbTools';
 import Config from '../../../externals/config';
 import Axios from 'axios';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { blogPost } from '../../../../rww-backend/dbTypes';
 
 interface ACBProps {
@@ -19,7 +18,7 @@ interface ACBProps {
 const AdminEditBlogContent: FunctionComponent<ACBProps> = (props) => {
     
     const match = useRouteMatch<{title: string}>();
-    const [blogPost, setblogPost] = useState<blogPost>(dbDefaults.blogPost_default()); // TODO Set this to be some actual values
+    const [blogPostObj, setblogPost] = useState<blogPost>(dbDefaults.blogPost_default()); // TODO Set this to be some actual values
 
     useEffect(() => {
         // Only query if we are in edit mode
@@ -45,7 +44,7 @@ const AdminEditBlogContent: FunctionComponent<ACBProps> = (props) => {
             <form action={`${Config.getBackendURL()}/blog/upload`}  method="POST">
                 <Editor
                     apiKey="o4g5kb8cmig71uhnkjb5kn5r540lg89kn646mvrzish0s4j0"
-                    value={blogPost?.html}
+                    value={blogPostObj?.html}
                     disabled={!props.editMode}
                     init={
                     {
@@ -74,7 +73,7 @@ const AdminEditBlogContent: FunctionComponent<ACBProps> = (props) => {
                     textareaName="blogEditor"
                     outputFormat="html"
                     onEditorChange={ (content: string) => {
-                        let newBlogpost = blogPost;
+                        let newBlogpost = blogPostObj;
                         newBlogpost.html = content;
                         setblogPost(newBlogpost);
                     }}
@@ -90,7 +89,7 @@ const AdminEditBlogContent: FunctionComponent<ACBProps> = (props) => {
     
         Axios(`${Config.getBackendURL()}/blog/upload`,
             {
-                data: blogPost,
+                data: blogPostObj,
                 method: "POST",
             }
         );  

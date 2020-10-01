@@ -17,7 +17,7 @@ const DataTable: React.FunctionComponent<TableProps> = (props: TableProps) => {
         <table className="table table-bordered table-hover">
             <thead>
                 <tr>
-                    {columnNames.map( (name: string) => { return <th>{name}</th> })}
+                    {columnNames.map( (name: string) => { return <th key={name}>{name}</th> })}
                 </tr>
             </thead>
             <tbody>
@@ -42,12 +42,12 @@ function getTableRows(props: TableProps): Array<JSX.Element> {
         for(let name of columnNames) {
 
             rowData.push(
-                <td>{props.data[i][name]}</td>
+                <td key={`${name}${i}`}>{props.data[i][name]}</td>
             )
         }
 
         tableRows.push( 
-            <tr>
+            <tr key={`${props.data[i]["title"]}${i}`}>
                 {rowData}
             </tr>
         )

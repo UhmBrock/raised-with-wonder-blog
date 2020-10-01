@@ -39,4 +39,11 @@ router.get('/all/', (req: Request, res: Response) => {
     );
 });
 
+// /publish/upload/
+// ---- Write a blog's publishing locations to the database
+router.post('/upload', bodyParser.json(), (req: Request, res: Response) => {
+
+    
+
+});
 export default router;

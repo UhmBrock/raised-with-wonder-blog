@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { dbRequest, dbUtilities, dbDefaults } from '../../../externals/dbTools';
 import Config from '../../../externals/config';
 import { tag, publishing_location } from '../../../../rww-backend/dbTypes';
-import { response } from 'express';
-import { useRouteMatch, Redirect } from 'react-router-dom';
-import { redirect } from 'express/lib/response';
-import { EditorPropTypes } from '@tinymce/tinymce-react/lib/cjs/main/ts/components/EditorPropTypes';
+import { useRouteMatch } from 'react-router-dom';
 import Axios from 'axios';
 
 interface DetailProps {
@@ -18,9 +15,9 @@ const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
     const match = useRouteMatch<{title: string}>();
     
     const [title, setTitle] = useState<string>(match.params.title);
-    const [featured_image, setFeatured_image] = useState<string>("");
+    const [featured_image] = useState<string>("");
     const [excerpt, setExcerpt] = useState<string>("");
-    const [tags, setTags] = useState<tag[]>([]);
+    const [, setTags] = useState<tag[]>([]);
     const [publishingLocations, setPublishingLocations] = useState<publishing_location[]>([]);
     const [publishingData, setPublishingData] = useState<Array<{locationName: string, checked: boolean}>>([]);
     const [alert, setAlert] = useState<JSX.Element | undefined>();
@@ -98,8 +95,8 @@ const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
             // Blog exists, update it if we are in edit mode and the title has not been changed
             if(!props.editMode || match.params.title !== dbUtilities.serializeTitle(title)) {
                 setAlert(
-                <div className="alert alert-danger" role="alert">
-                    Blog already exists! Saved edited version.    
+                <div className="alert alert-warning" role="alert">
+                    Successfully edited existing blog.    
                 </div>);
                 return;
             }
@@ -108,17 +105,20 @@ const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
             blogPost.title = title;
             blogPost.featured_image = featured_image;
             blogPost.excerpt = excerpt;
-
-            // TODO Set tags and published
-
             Axios(`${Config.getBackendURL()}/blog/upload`,
             {
                 data: blogPost,
                 method: "POST",
             });
+
+            // TODO Set tags and published and save to DB seperately
+
+            
+            // Redirect to view blog
+            window.location.href = `${Config.getFrontendURL()}/admin/blogs/edit/${title}`;
         })
-        .catch((err) => {
-           // ! Blog does not exist in system, create a new one
+        .catch(() => {
+           // Blog does not exist in system, create a new one
 
             const blogPost = dbDefaults.blogPost_default();
 
@@ -205,7 +205,7 @@ const getCheckboxes = (publishingData: Array<{locationName: string, checked: boo
             
             let index = j * 3 + i;
 
-            rowElements.push(<span className="col"><label className="checkbox-inline"><input type="checkbox" className="form-control" checked={publishingData[i].checked} onClick={ e => {
+            rowElements.push(<span className="col"><label className="checkbox-inline"><input type="checkbox" className="form-control" checked={publishingData[i].checked} onClick={ () => {
                 const newPublishingData = [ ...publishingData ];
                 newPublishingData[index].checked = !newPublishingData[index].checked;
 

@@ -43,6 +43,19 @@ var dbRequest = /** @class */ (function () {
                 responseType: "json",
                 url: "/blog/" + title + "/publishedIn"
             });
+        },
+        /**
+         * Deleted the specific blog, found by filtering for title
+         * @param title The title of the blog in pretty format
+         */
+        "delete": function (blogPost) {
+            return axios_1["default"]({
+                method: "POST",
+                baseURL: config_1["default"].getBackendURL(),
+                data: blogPost,
+                responseType: "json",
+                url: "/blog/delete/"
+            });
         }
     };
     /**

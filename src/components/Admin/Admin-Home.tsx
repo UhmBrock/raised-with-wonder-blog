@@ -1,24 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, {  } from 'react';
 import AdminSidebar from './Admin-Sidebar';
 import "../../css/Admin-Home.scss";
-import { stat } from 'fs';
-import { useLocation, Switch, Route, useRouteMatch } from 'react-router-dom';
+import { Switch, Route, useRouteMatch } from 'react-router-dom';
 import AdminEditBlogContent from './Admin-Blogs/AdminEditBlogContent';
 import AdminViewBlogs from './Admin-Blogs/AdminViewBlogs';
 import AdminEditBlogDetail from './Admin-Blogs/AdminEditBlogDetail';
-import { tag } from '../../../rww-backend/dbTypes';
-import { dbRequest } from '../../externals/dbTools';
+import AdminDeleteBlog from './Admin-Blogs/AdminDeleteBlog';
 
 interface AHProps {
 
 }
 
-interface AHState {
-}
 
 const AdminHome: React.FunctionComponent<AHProps> = () => {
 
-    const {path, params} = useRouteMatch();
+    const {path} = useRouteMatch();
 
     return (
         <div className="wrapper">
@@ -31,6 +27,11 @@ const AdminHome: React.FunctionComponent<AHProps> = () => {
                         { /** View table of all blogs */}
                         <Route path={`${path}/blogs/view`}>
                             <AdminViewBlogs />
+                        </Route>
+
+                        { /** Delete an existing blog document */}
+                        <Route path={`${path}/blogs/delete/:title`}>
+                            <AdminDeleteBlog />
                         </Route>
 
                         { /** Edit an existing blog document */}

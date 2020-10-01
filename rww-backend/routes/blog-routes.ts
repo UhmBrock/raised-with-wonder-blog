@@ -144,6 +144,25 @@ router.post('/upload', bodyParser.json(), (req: Request, res: Response) => {
 
 });
 
+// /blog/delete
+// ---- Write a blog to the database
+router.post('/delete', bodyParser.json(), (req: Request, res: Response) => {
 
+    const blogPost: blogPost = req.body;
+
+    pool.query(
+        `DELETE FROM blogs WHERE id=${blogPost.id}`,
+        (err, result) => {
+            if(err) {
+                throw err;
+            }
+
+            if(result.rowCount > 0) {
+                console.log("Deleted blog: " + blogPost.title);
+            }
+        }
+    )
+
+});
 
 export default router;

@@ -56,9 +56,26 @@ export class dbRequest {
                 }
             );
 
+        },
+
+        /**
+         * Deleted the specific blog, found by filtering for title
+         * @param title The title of the blog in pretty format
+         */
+        delete(blogPost: blogPost): AxiosPromise<blogPost> {
+
+ 
+            return Axios(
+                {
+                    method: "POST",
+                    baseURL: Config.getBackendURL(),
+                    data: blogPost,
+                    responseType: "json",
+                    url: `/blog/delete/`
+                }
+            );
+
         }
-
-
 
     };   
 

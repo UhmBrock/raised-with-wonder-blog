@@ -13,21 +13,16 @@ import banner_image from '../../images/rww-banner.png';
 import Navbar from './Navbar';
 import AdminEditBlogContent from '../Admin/Admin-Blogs/AdminEditBlogContent';
 import AdminHome from '../Admin/Admin-Home';
-import BlogPreview from './BlogPreview';
 import DisplayBlog from './DisplayBlog';
-import { blogPost, tag } from '../../../rww-backend/dbTypes';
+import { blogPost } from '../../../rww-backend/dbTypes';
 import Axios from 'axios';
 import Config from '../../externals/config';
 import ResponsiveImage from '../ResponsiveImage/ResponsiveImage';
-import { dbRequest } from '../../externals/dbTools';
  
 interface BaseAppProps {
 
 }
 
-interface BaseAppState { 
-
-}
 
 const BaseApp: React.FunctionComponent<BaseAppProps> = () => {
 
@@ -90,7 +85,7 @@ const BaseApp: React.FunctionComponent<BaseAppProps> = () => {
 
                                     <Switch>
                                         <Route exact path="/">
-                                            { blogPosts.map( (blogPost) => <DisplayBlog displayExcerpt={false} blogTitle={blogPost.title}/>)}
+                                            { blogPosts.map( (blogPost) => <DisplayBlog key={blogPost.title} displayExcerpt={false} blogTitle={blogPost.title}/>)}
                                         </Route>
 
                                         { /* View a specific blog */}
