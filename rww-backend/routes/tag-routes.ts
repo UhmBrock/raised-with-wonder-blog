@@ -29,7 +29,7 @@ router.get('/all/', (req: Request, res: Response) => {
             }
 
             res.json(result.rows);
-            console.log("Sent tags");
+            console.log("Sent ALL tags");
         }
     );
 });

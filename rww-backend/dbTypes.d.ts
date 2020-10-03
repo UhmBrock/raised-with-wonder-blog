@@ -19,3 +19,8 @@ export interface publishing_location {
     id?: number;
     location_name: string;
 }
+
+export interface blog_m2m_publishing {
+    blogID: number;
+    locationID: number;
+}

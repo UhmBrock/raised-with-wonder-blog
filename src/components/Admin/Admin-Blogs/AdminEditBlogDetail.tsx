@@ -9,6 +9,7 @@ interface DetailProps {
     editMode?: boolean;
 }
 
+type published_location_data = { location: publishing_location, checked: boolean};
 
 const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
 
@@ -17,9 +18,9 @@ const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
     const [title, setTitle] = useState<string>(match.params.title);
     const [featured_image] = useState<string>("");
     const [excerpt, setExcerpt] = useState<string>("");
-    const [, setTags] = useState<tag[]>([]);
-    const [publishingLocations, setPublishingLocations] = useState<publishing_location[]>([]);
-    const [publishingData, setPublishingData] = useState<Array<{locationName: string, checked: boolean}>>([]);
+    const [tags, setTags] = useState<tag[]>([]);
+    const [allPublishingLocations, setAllPublishingLocations] = useState<publishing_location[]>([]);
+    const [publishedData, setPublishedData] = useState<published_location_data[]>([]);
     const [alert, setAlert] = useState<JSX.Element | undefined>();
 
 
@@ -41,7 +42,7 @@ const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
     useEffect(() => {
         dbRequest.PublishLocations.getAll()
         .then( (response) => {
-            setPublishingLocations(response.data);
+            setAllPublishingLocations(response.data);
         })
     }, []);
 
@@ -53,14 +54,14 @@ const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
         dbRequest.Blogs.getPublishedLocations(match.params.title)
         .then( (response) => {
             
-            const locationData: Array<{ locationName: string, checked: boolean}> = [];
+            const locationData: published_location_data[] = [];
 
-            for(const location of publishingLocations) {
+            for(const location of allPublishingLocations) {
 
-                let record = { locationName: location.location_name, checked: false};
+                let record: published_location_data = { location: location, checked: false};
                 
-                for(const data of response.data) {
-                    if(data.location_name === location.location_name) {
+                for(const publishedLocation of response.data) {
+                    if(publishedLocation.location_name === location.location_name) {
                         record.checked = true;
                         break;
                     }
@@ -69,9 +70,9 @@ const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
                 locationData.push(record);
             }
 
-            setPublishingData(locationData);
+            setPublishedData(locationData);
         })
-    }, [publishingLocations, match.params.title]);
+    }, [allPublishingLocations, match.params.title]);
 
     /**
      * Get the blog and assign the default values to each of the fields
@@ -85,6 +86,10 @@ const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
         })
     }, [match.params.title])
 
+    /**
+     * Handle the submission of the edit form. 
+     * @param event 
+     */
     const handleSubmit = (event: React.FormEvent) => {
         
         // Cancel the submission to handle it manually
@@ -92,15 +97,17 @@ const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
 
         dbRequest.Blogs.get(dbUtilities.serializeTitle(title))
         .then( (response) => {
-            // Blog exists, update it if we are in edit mode and the title has not been changed
+            // Blog exists, if we are not in edit mode or the title has changed, then throw error
             if(!props.editMode || match.params.title !== dbUtilities.serializeTitle(title)) {
                 setAlert(
                 <div className="alert alert-warning" role="alert">
-                    Successfully edited existing blog.    
+                    {props.editMode}
+                    {match.params.title} === {dbUtilities.serializeTitle(title)}
                 </div>);
                 return;
             }
             
+            // Update and save the blog details
             const blogPost = response.data;
             blogPost.title = title;
             blogPost.featured_image = featured_image;
@@ -112,7 +119,15 @@ const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
             });
 
             // TODO Set tags and published and save to DB seperately
-
+            // Update and save the publishing locations
+            Axios(`${Config.getBackendURL()}/publish/upload`,
+            {
+                data: {
+                    blogPost: blogPost,
+                    locations: publishedData
+                },
+                method: "POST",
+            });
             
             // Redirect to view blog
             window.location.href = `${Config.getFrontendURL()}/admin/blogs/edit/${title}`;
@@ -162,7 +177,7 @@ const AdminEditBlogDetail: React.FunctionComponent<DetailProps> = (props) => {
                 )}
                 { /** Published Checkbox*/}
                 {formGroupRow("Published",
-                    getCheckboxes(publishingData, setPublishingData)
+                    getCheckboxes(publishedData, setPublishedData)
                 )}
                 <div className="form-group row">
                     <input className="btn btn-primary col-10" type="submit" value="Save"/>
@@ -188,29 +203,26 @@ const formGroupRow = (labelText: string, input: JSX.Element | JSX.Element[]): JS
     )
 };
 
-const getCheckboxes = (publishingData: Array<{locationName: string, checked: boolean}>, setPublishingData: React.Dispatch<React.SetStateAction<{
-    locationName: string;
-    checked: boolean;
-}[]>>): JSX.Element[] => {
+const getCheckboxes = (publishedData: published_location_data[], setPublishedData: React.Dispatch<React.SetStateAction<published_location_data[]>>): JSX.Element[] => {
 
     const elements: Array<JSX.Element> = [];
 
-    const numCheckboxRows = Math.ceil(publishingData.length / 3);
+    const numCheckboxRows = Math.ceil(publishedData.length / 3);
 
     for( let j = 0; j < numCheckboxRows; j++) {
 
-        let rowElements: Array<JSX.Element> = [];
+        let rowElements: Array<JSX.Element> = []; 
 
         for(let i = 0; i < 3; i++ ){
             
             let index = j * 3 + i;
 
-            rowElements.push(<span className="col"><label className="checkbox-inline"><input type="checkbox" className="form-control" checked={publishingData[i].checked} onClick={ () => {
-                const newPublishingData = [ ...publishingData ];
+            rowElements.push(<span className="col"><label className="checkbox-inline"><input type="checkbox" className="form-control" checked={publishedData[i].checked} onClick={ () => {
+                const newPublishingData = [ ...publishedData ];
                 newPublishingData[index].checked = !newPublishingData[index].checked;
 
-                setPublishingData(newPublishingData);
-            }}/>{publishingData[index].locationName}</label></span>);
+                setPublishedData(newPublishingData);
+            }}/>{publishedData[index].location.location_name}</label></span>);
 
         }
 

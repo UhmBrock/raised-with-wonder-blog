@@ -23,7 +23,7 @@ export class dbRequest {
                     url: `/blog/${title}`,
                 }
             );
-    
+     
         },
     
         /**
@@ -33,7 +33,7 @@ export class dbRequest {
     
             return Axios(
                 { 
-                    method: "GET", 
+                    method: "GET",  
                     baseURL: Config.getBackendURL(), 
                     responseType: "json",
                     url: `/blog/all`,
@@ -64,7 +64,6 @@ export class dbRequest {
          */
         delete(blogPost: blogPost): AxiosPromise<blogPost> {
 
- 
             return Axios(
                 {
                     method: "POST",

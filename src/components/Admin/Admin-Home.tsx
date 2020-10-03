@@ -36,7 +36,7 @@ const AdminHome: React.FunctionComponent<AHProps> = () => {
 
                         { /** Edit an existing blog document */}
                         <Route path={`${path}/blogs/create/:title`}>
-                            <AdminEditBlogDetail editMode={false}/>
+                            <AdminEditBlogDetail editMode={true}/>
                         </Route>
 
                         { /** Create a new blog document */}
