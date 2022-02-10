@@ -68,7 +68,7 @@
     "@types/passport-facebook": "^2.1.10",
     "@types/passport-google-oauth20": "^2.0.3",
     "@types/passport-instagram": "^1.0.1",
-    "node-sass": "^4.14.1",
+    "node-sass": "^7.0.0",
     "typescript": "^3.9.7"
   }
 }
